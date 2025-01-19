@@ -4,7 +4,7 @@
         rounded="0"
         flat
     >
-        <v-toolbar density="compact">
+        <v-toolbar density="compact" color="black">
             <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
             <Link href="/">

@@ -122,14 +122,16 @@
             </v-btn>
         </v-col>
         <v-col cols="12" sm="4" class="text-center">
-            <v-btn
-                block
-                color="primary"
-                size="x-large"
-                :class="$vuetify.display.smAndDown ? 'mb-2' : ''"
-            >
-                Lista Operatori
-            </v-btn>
+            <Link href="/listaOperatori" preserve-state>
+                <v-btn
+                    block
+                    color="primary"
+                    size="x-large"
+                    :class="$vuetify.display.smAndDown ? 'mb-2' : ''"
+                >
+                    Lista Operatori
+                </v-btn>
+            </Link>
         </v-col>
     </v-row>
 
@@ -138,6 +140,7 @@
 
 <script setup>
 import {Head} from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3'
 </script>
 
 <style scoped>
