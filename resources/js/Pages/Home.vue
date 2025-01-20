@@ -36,14 +36,16 @@
 
     <v-row :no-gutters="$vuetify.display.smAndDown" :class="$vuetify.display.smAndDown ? '' : 'mt-2'">
         <v-col cols="12" sm="4" class="text-center">
-            <v-btn
-                block
-                color="primary"
-                size="x-large"
-                :class="$vuetify.display.smAndDown ? 'mb-2' : ''"
-            >
-                Inserisci Vettura
-            </v-btn>
+            <Link href="/listaCar" preserve-state>
+                <v-btn
+                    block
+                    color="primary"
+                    size="x-large"
+                    :class="$vuetify.display.smAndDown ? 'mb-2' : ''"
+                >
+                    Inserisci Vettura
+                </v-btn>
+            </Link>
         </v-col>
         <v-col cols="12" sm="4" class="text-center">
             <v-btn

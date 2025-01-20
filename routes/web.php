@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -15,7 +17,7 @@ use Inertia\Inertia;
     ]);
 });*/
 
-Route::get('/', [\App\Http\Controllers\FrontController::class, 'inizio'])->name('inizio');
+Route::get('/', [FrontController::class, 'inizio'])->name('inizio');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -25,6 +27,12 @@ Route::middleware('auth')->group(function () {
     // ----------------------------USER------------------------------------
     Route::get('/listaOperatori', [UserController::class, 'listaOperatori'])->name('listaOperatori');
     Route::delete('/eliminaOperatore/{id}', [UserController::class, 'eliminaOperatore'])->name('eliminaOperatore');
+    Route::patch('/operatore/{user}', [UserController::class, 'modificaOperatore'])->name('modificaOperatore');
+
+    // ----------------------------CAR------------------------------------
+    Route::get('/listaCar', [CarController::class, 'listaCar'])->name('listaCar');
+    Route::delete('/eliminaCar/{id}', [CarController::class, 'eliminaCar'])->name('eliminaCar');
+    Route::patch('/car/{car}', [CarController::class, 'modificaCar'])->name('modificaCar');
 
 
 

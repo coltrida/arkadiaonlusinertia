@@ -1,10 +1,10 @@
 <template>
-    <Head title="Lista Operatori" />
+    <Head title="Lista Vetture" />
 
-    <h2 class="text-h3 text-center text-white my-2">Lista Operatori</h2>
+    <h2 class="text-h3 text-center text-white my-2">Lista Vetture</h2>
     <v-data-table
         class="rounded elevation-1 custom-table"
-        :items="props.listaOperatoriPaginate.data"
+        :items="props.listaVetture"
         :headers="headers"
     >
         <template v-slot:item.azioni="{ item }">
@@ -20,7 +20,7 @@
                 >
                     <v-card>
                         <v-card-title>Conferma Eliminazione</v-card-title>
-                        <v-card-text>Sei sicuro di eliminare l'operatore con ID: <strong>{{ itemToDelete }}</strong>  ?</v-card-text>
+                        <v-card-text>Sei sicuro di eliminare la vettura con ID: <strong>{{ itemToDelete }}</strong>  ?</v-card-text>
 
                         <template v-slot:actions>
                             <v-spacer></v-spacer>
@@ -40,7 +40,7 @@
                     persistent
                 >
                     <v-card>
-                        <v-card-title>Modifica Operatore</v-card-title>
+                        <v-card-title>Modifica Vettura</v-card-title>
 
                         <v-form v-model="valid">
                             <v-container>
@@ -57,39 +57,6 @@
                                         ></v-text-field>
                                     </v-col>
 
-                                    <v-col
-                                        cols="12"
-                                        md="2"
-                                    >
-                                        <v-text-field
-                                            v-model="formEdit.oresettimanali"
-                                            label="Ore settim."
-                                            required
-                                        ></v-text-field>
-                                    </v-col>
-
-                                    <v-col
-                                        cols="12"
-                                        md="2"
-                                    >
-                                        <v-text-field
-                                            v-model="formEdit.oresaldo"
-                                            label="Ore saldo"
-                                            required
-                                        ></v-text-field>
-                                    </v-col>
-
-                                    <v-col
-                                        cols="12"
-                                        md="4"
-                                    >
-                                        <v-text-field
-                                            v-model="formEdit.email"
-                                            :rules="emailEditRules"
-                                            label="E-mail"
-                                            required
-                                        ></v-text-field>
-                                    </v-col>
                                 </v-row>
                             </v-container>
                         </v-form>
@@ -131,12 +98,9 @@ const form = useForm();
 
 const formEdit = useForm({
     name: null,
-    email: null,
-    oresettimanali: null,
-    oresaldo: null,
 })
 
-const props = defineProps({ listaOperatoriPaginate: Object });
+const props = defineProps({ listaVetture: Object });
 
 const dialog = ref(false);
 const dialogEdit = ref(false);
@@ -156,18 +120,6 @@ const nomeEditRules = [
     }
 ];
 
-// Regole di validazione per l'email
-const emailEditRules = [
-    value => {
-        if (value) return true;
-        return 'E-mail obbligatoria.';
-    },
-    value => {
-        if (/.+@.+\..+/.test(value)) return true;
-        return 'E-mail deve essere valida.';
-    },
-];
-
 // Funzione per aprire il dialogo di eliminazione
 function openDialog(id) {
     itemToDelete.value = id; // Memorizza l'ID dell'elemento da eliminare
@@ -177,18 +129,13 @@ function openDialog(id) {
 // Funzione per aprire il dialogo di modifica
 function openDialogEdit(item) {
     itemToEdit.value = item.id;
-
     formEdit.name = item.name;
-    formEdit.oresettimanali = item.oresettimanali;
-    formEdit.oresaldo = item.oresaldo;
-    formEdit.email = item.email;
-
     dialogEdit.value = true; // Apri il dialogo
 }
 
 // Funzione per confermare l'eliminazione
 function confirmDelete() {
-    form.delete('/eliminaOperatore/'+itemToDelete.value, {
+    form.delete('/eliminaCar/'+itemToDelete.value, {
         onSuccess: () => {
             testoInfo.value = 'Eliminazione elemento id = ' + itemToDelete.value + ' effettuato'
             dialogResult.value = true;
@@ -200,7 +147,7 @@ function confirmDelete() {
 
 // Funzione per confermare la modifica
 function confirmEdit() {
-    formEdit.patch('/operatore/'+itemToEdit.value, {
+    formEdit.patch('/car/'+itemToEdit.value, {
         onSuccess: () => {
             testoInfo.value = 'Modifica elemento id = ' + itemToEdit.value + ' effettuata'
             dialogResult.value = true;
@@ -214,9 +161,6 @@ function confirmEdit() {
 const headers = [
     { title: "ID", key: "id" },
     { title: "Nome", key: "name" },
-    { title: "Email", key: "email" },
-    { title: "oresettimanali", key: "oresettimanali" },
-    { title: "oresaldo", key: "oresaldo" },
     { title: "azioni", key: "azioni" },
 ];
 </script>
@@ -224,3 +168,4 @@ const headers = [
 <style scoped>
 
 </style>
+
