@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/listaCar', [CarController::class, 'listaCar'])->name('listaCar');
     Route::delete('/eliminaCar/{id}', [CarController::class, 'eliminaCar'])->name('eliminaCar');
     Route::patch('/car/{car}', [CarController::class, 'modificaCar'])->name('modificaCar');
+
+    // ----------------------------ACTIVITY------------------------------------
+    Route::get('/listaAttivita', [ActivityController::class, 'listaAttivita'])->name('listaAttivita');
+    Route::delete('/eliminaAttivita/{id}', [ActivityController::class, 'eliminaAttivita'])->name('eliminaAttivita');
+    Route::patch('/attivita/{activity}', [ActivityController::class, 'modificaAttivita'])->name('modificaAttivita');
 
 
 

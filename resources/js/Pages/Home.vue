@@ -48,14 +48,16 @@
             </Link>
         </v-col>
         <v-col cols="12" sm="4" class="text-center">
-            <v-btn
-                block
-                color="primary"
-                size="x-large"
-                :class="$vuetify.display.smAndDown ? 'mb-2' : ''"
-            >
-                Inserisci Attività
-            </v-btn>
+            <Link href="/listaAttivita" preserve-state>
+                <v-btn
+                    block
+                    color="primary"
+                    size="x-large"
+                    :class="$vuetify.display.smAndDown ? 'mb-2' : ''"
+                >
+                    Inserisci Attività
+                </v-btn>
+            </Link>
         </v-col>
         <v-col cols="12" sm="4" class="text-center">
             <v-btn
